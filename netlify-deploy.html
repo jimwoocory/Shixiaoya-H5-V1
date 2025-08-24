@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>施小雅板材 - Netlify部署版</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .btn { display: inline-block; padding: 12px 24px; background: #22C55E; color: white; text-decoration: none; border-radius: 5px; margin: 10px 0; }
+        .step { margin: 20px 0; padding: 15px; background: #f8f9fa; border-left: 4px solid #22C55E; }
+        h1 { color: #8B4513; }
+        h2 { color: #22C55E; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏗️ 施小雅板材 - 快速部署指南</h1>
+        
+        <div class="step">
+            <h2>📋 方案A：Netlify拖拽部署（推荐）</h2>
+            <p>1. 访问：<a href="https://app.netlify.com/drop" target="_blank">https://app.netlify.com/drop</a></p>
+            <p>2. 将整个项目文件夹拖拽到页面中</p>
+            <p>3. 等待部署完成，获得临时域名</p>
+            <p>4. 在设置中添加自定义域名</p>
+        </div>
+
+        <div class="step">
+            <h2>🌐 方案B：Vercel GitHub导入</h2>
+            <p>1. 先手动创建GitHub仓库：<a href="https://github.com/new" target="_blank">创建仓库</a></p>
+            <p>2. 仓库名：shixiaoya-bancai</p>
+            <p>3. 上传所有文件到仓库</p>
+            <p>4. 在Vercel导入该仓库</p>
+        </div>
+
+        <div class="step">
+            <h2>⚡ 方案C：直接使用现有HTML</h2>
+            <p>当前目录的 index.html 已包含完整功能</p>
+            <p>可直接部署到任何静态托管服务</p>
+            <a href="../index.html" class="btn">预览当前版本</a>
+        </div>
+
+        <div class="step">
+            <h2>🔧 域名配置</h2>
+            <p>部署完成后，在托管平台添加域名：</p>
+            <ul>
+                <li>shixiaoya.asia</li>
+                <li>施小雅.中国</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
