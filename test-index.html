@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>施小雅板材 - 测试页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f8f5f2;
+            color: #333;
+        }
+        
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8c6e4a;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .nav a.active {
+            color: #8c6e4a;
+        }
+        
+        .phone {
+            color: #8c6e4a;
+            font-weight: bold;
+        }
+        
+        .banner {
+            background: linear-gradient(135deg, #8c6e4a, #a67c52);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+        }
+        
+        .banner h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .banner p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .product-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .product-price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8c6e4a;
+        }
+        
+        .advantages {
+            background: white;
+            margin: 40px 0;
+        }
+        
+        .advantage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .advantage-item {
+            text-align: center;
+            padding: 30px 20px;
+            background: #f8f5f2;
+            border-radius: 12px;
+        }
+        
+        .advantage-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .advantage-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .advantage-desc {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .contact-section {
+            background: #8c6e4a;
+            color: white;
+            text-align: center;
+        }
+        
+        .contact-buttons {
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 0 10px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: #8c6e4a;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav {
+                gap: 20px;
+            }
+            
+            .banner h1 {
+                font-size: 28px;
+            }
+            
+            .products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="logo">施小雅板材</div>
+        <nav class="nav">
+            <a href="#" class="active">首页</a>
+            <a href="#">产品</a>
+            <a href="#">案例</a>
+            <a href="#">认证</a>
+            <a href="#">关于</a>
+            <a href="#">联系</a>
+        </nav>
+        <div class="phone">400-888-8888</div>
+    </header>
+
+    <!-- 主横幅 -->
+    <section class="banner">
+        <h1>匠心品质 环保板材</h1>
+        <p>为您提供健康环保的家居生活</p>
+    </section>
+
+    <!-- 产品中心 -->
+    <section class="section">
+        <h2>产品中心</h2>
+        <p style="text-align: center; color: #666; margin-bottom: 40px;">
+            施小雅板材提供多样化的产品系列，从基础款到高端定制，满足不同家居风格和使用需求
+        </p>
+        
+        <div class="products">
+            <div class="product-card">
+                <div class="product-image">超E0级实木颗粒板</div>
+                <div class="product-info">
+                    <div class="product-name">超E0级实木颗粒板</div>
+                    <div class="product-desc">采用优质木材颗粒，经高温高压制成，具有优异的物理性能和环保特性。</div>
+                    <div class="product-price">¥168/张</div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">多层实木板</div>
+                <div class="product-info">
+                    <div class="product-name">多层实木板</div>
+                    <div class="product-desc">精选优质木材，多层交错排列，具有良好的稳定性和承重能力。</div>
+                    <div class="product-price">¥228/张</div>
+                </div>
+            </div>
+            
+            <div class="product-card">
+                <div class="product-image">免漆生态板</div>
+                <div class="product-info">
+                    <div class="product-name">免漆生态板</div>
+                    <div class="product-desc">表面经过特殊处理，无需油漆，花色丰富，安全方便。</div>
+                    <div class="product-price">¥198/张</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品优势 -->
+    <section class="section advantages">
+        <h2>产品优势</h2>
+        <div class="advantage-grid">
+            <div class="advantage-item">
+                <div class="advantage-icon">🌿</div>
+                <div class="advantage-title">环保健康</div>
+                <div class="advantage-desc">E0级环保标准，甲醛释放量≤0.1mg/L</div>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-icon">🛡️</div>
+                <div class="advantage-title">品质保证</div>
+                <div class="advantage-desc">严格把控，每批产品都有质量检测报告</div>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-icon">🏆</div>
+                <div class="advantage-title">权威认证</div>
+                <div class="advantage-desc">通过CARB、FSC等国际权威认证</div>
+            </div>
+            <div class="advantage-item">
+                <div class="advantage-icon">⭐</div>
+                <div class="advantage-title">客户好评</div>
+                <div class="advantage-desc">50万+家庭选择，客户满意度98%+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系咨询 -->
+    <section class="section contact-section">
+        <h2>想要打造您的理想空间?</h2>
+        <p>联系我们的设计团队，为您提供专业的板材选择和空间设计建议</p>
+        <div class="contact-buttons">
+            <a href="#" class="btn btn-primary">免费设计咨询</a>
+            <a href="#" class="btn btn-secondary">了解更多</a>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>© 2023 施小雅板材 版权所有</p>
+        <p>电话：400-888-8888</p>
+    </footer>
+
+    <script>
+        // 简单的交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('施小雅板材网站加载完成！');
+            
+            // 产品卡片点击效果
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    alert('产品详情功能开发中...');
+                });
+            });
+            
+            // 按钮点击效果
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('功能开发中，敬请期待！');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

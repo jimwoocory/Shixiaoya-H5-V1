@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>施小雅板材系统 - 后端API演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .status {
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .nav-tab.active {
+            background: white;
+            border-bottom: 3px solid #007bff;
+            color: #007bff;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .api-section {
+            margin-bottom: 30px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .api-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .api-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .api-method {
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .method-get { background: #28a745; }
+        .method-post { background: #007bff; }
+        .method-put { background: #ffc107; color: #212529; }
+        .method-delete { background: #dc3545; }
+
+        .api-body {
+            padding: 20px;
+        }
+
+        .api-url {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-bottom: 15px;
+            border-left: 4px solid #007bff;
+        }
+
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            transition: background 0.3s;
+        }
+
+        .test-button:hover {
+            background: #0056b3;
+        }
+
+        .response-area {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+            display: none;
+        }
+
+        .response-area.show {
+            display: block;
+        }
+
+        .response-area pre {
+            margin: 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .loading {
+            color: #007bff;
+            font-style: italic;
+        }
+
+        .error {
+            color: #dc3545;
+            border-left-color: #dc3545;
+        }
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .quick-link {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .quick-link:hover {
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 4px solid #007bff;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            height: 80px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ 施小雅板材系统</h1>
+            <p>后端API接口演示平台</p>
+        </div>
+
+        <div class="status" id="serverStatus">
+            🔄 正在检查服务器状态...
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showTab('overview')">系统概览</button>
+            <button class="nav-tab" onclick="showTab('products')">产品管理</button>
+            <button class="nav-tab" onclick="showTab('categories')">分类管理</button>
+            <button class="nav-tab" onclick="showTab('inquiries')">询价管理</button>
+            <button class="nav-tab" onclick="showTab('applications')">应用场景</button>
+        </div>
+
+        <!-- 系统概览 -->
+        <div id="overview" class="tab-content active">
+            <div class="quick-links">
+                <a href="http://localhost:3000/api/docs" target="_blank" class="quick-link">
+                    📖 API文档<br>
+                    <small>Swagger接口文档</small>
+                </a>
+                <a href="http://localhost:3000/health" target="_blank" class="quick-link">
+                    💚 健康检查<br>
+                    <small>系统状态监控</small>
+                </a>
+                <a href="http://localhost:3000/api" target="_blank" class="quick-link">
+                    🔗 API根路径<br>
+                    <small>接口信息总览</small>
+                </a>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="productCount">-</div>
+                    <div class="stat-label">产品数量</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="categoryCount">-</div>
+                    <div class="stat-label">分类数量</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="inquiryCount">-</div>
+                    <div class="stat-label">询价数量</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="applicationCount">-</div>
+                    <div class="stat-label">应用场景</div>
+                </div>
+            </div>
+
+            <div class="api-section">
+                <div class="api-header">
+                    <div class="api-title">系统健康检查</div>
+                    <span class="api-method method-get">GET</span>
+                </div>
+                <div class="api-body">
+                    <div class="api-url">GET /health</div>
+                    <button class="test-button" onclick="testAPI('/health', 'GET', null, 'health-response')">测试接口</button>
+                    <div id="health-response" class="response-area"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品管理 -->
+        <div id="products" class="tab-content">
+            <div class="api-section">
+                <div class="api-header">
+                    <div class="api-title">获取产品列表</div>
+                    <span class="api-method method-get">GET</span>
+                </div>
+                <div class="api-body">
+                    <div class="api-url">GET /api/products</div>
+                    <button class="test-button" onclick="testAPI('/api/products', 'GET', null, 'products-list-response')">获取所有产品</button>
+                    <button class="test-button" onclick="testAPI('/api/products?page=1&limit=5', 'GET', null, 'products-list-response')">分页查询</button>
+                    <div id="products-list-response" class="response-area"></div>
+                </div>
+            </div>
+
+            <div class="api-section">
+                <div class="api-header">
+                    <div class="api-title">获取产品详情</div>
+                    <span class="api-method method-get">GET</span>
+                </div>
+                <div class="api-body">
+                    <div class="api-url">GET /api/products/:id</div>
+                    <button class="test-button" onclick="testAPI('/api/products/1', 'GET', null, 'product-detail-response')">查看产品1</button>
+                    <button class="test-button" onclick="testAPI('/api/products/2', 'GET', null, 'product-detail-response')">查看产品2</button>
+                    <div id="product-detail-response" class="response-area"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分类管理 -->
+        <div id="categories" class="tab-content">
+            <div class="api-section">
+                <div class="api-header">
+                    <div class="api-title">获取分类列表</div>
+                    <span class="api-method method-get">GET</span>
+                </div>
+                <div class="api-body">
+                    <div class="api-url">GET /api/categories</div>
+                    <button class="test-button" onclick="testAPI('/api/categories', 'GET', null, 'categories-response')">获取所有分类</button>
+                    <div id="categories-response" class="response-area"></div>
+                </div>
+            </div>
+
+            <div class="api-section">
+                <div class="api-header">
+                    <div class="api-title">获取分类详情</div>
+                    <span class="api-method method-get">GET</span>
+                </div>
+                <div class="api-body">
+                    <div class="api-url">GET /api/categories/:id</div>
+                    <button class="test-button" onclick="testAPI('/api/categories/1', 'GET', null, 'category-detail-response')">查看分类1</button>
+                    <div id="category-detail-response" class="response-area"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 询价管理 -->
+        <div id="inquiries" class="tab-content">
+            <div class="api-section">
+                <div class="api-header">
+                    <div class="api-title">提交询价</div>
+                    <span class="api-method method-post">POST</span>
+                </div>
+                <div class="api-body">
+                    <div class="api-url">POST /api/inquiries</div>
+                    
+                    <div class="form-group">
+                        <label>联系人姓名</label>
+                        <input type="text" id="contactName" value="张先生" placeholder="请输入联系人姓名">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>联系电话</label>
+                        <input type="text" id="contactPhone" value="13800138000" placeholder="请输入联系电话">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>联系邮箱</label>
+                        <input type="email" id="contactEmail" value="zhang@example.com" placeholder="请输入联系邮箱">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>公司名称</label>
+                        <input type="text" id="companyName" value="某装修公司" placeholder="请输入公司名称">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>具体需求</label>
+                        <textarea id="requirements" placeholder="请描述您的具体需求">需要100张超E0级实木颗粒板，用于办公室装修项目</textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>预计数量</label>
+                        <input type="number" id="quantity" value="100" placeholder="请输入预计数量">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>预算范围</label>
+                        <input type="number" id="budget" value="15000" placeholder="请输入预算金额">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>紧急程度</label>
+                        <select id="urgency">
+                            <option value="low">低</option>
+                            <option value="medium" selected>中等</option>
+                            <option value="high">高</option>
+                            <option value="urgent">紧急</option>
+                        </select>
+                    </div>
+                    
+                    <button class="test-button" onclick="submitInquiry()">提交询价</button>
+                    <div id="inquiry-submit-response" class="response-area"></div>
+                </div>
+            </div>
+
+            <div class="api-section">
+                <div class="api-header">
+                    <div class="api-title">获取询价列表</div>
+                    <span class="api-method method-get">GET</span>
+                </div>
+                <div class="api-body">
+                    <div class="api-url">GET /api/inquiries</div>
+                    <button class="test-button" onclick="testAPI('/api/inquiries', 'GET', null, 'inquiries-list-response')">获取所有询价</button>
+                    <div id="inquiries-list-response" class="response-area"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 应用场景 -->
+        <div id="applications" class="tab-content">
+            <div class="api-section">
+                <div class="api-header">
+                    <div class="api-title">获取应用场景列表</div>
+                    <span class="api-method method-get">GET</span>
+                </div>
+                <div class="api-body">
+                    <div class="api-url">GET /api/applications</div>
+                    <button class="test-button" onclick="testAPI('/api/applications', 'GET', null, 'applications-response')">获取所有应用场景</button>
+                    <div id="applications-response" class="response-area"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000';
+
+        // 切换标签页
+        function showTab(tabName) {
+            // 隐藏所有标签内容
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 移除所有标签的激活状态
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 显示选中的标签内容
+            document.getElementById(tabName).classList.add('active');
+            
+            // 激活选中的标签
+            event.target.classList.add('active');
+        }
+
+        // 测试API接口
+        async function testAPI(endpoint, method = 'GET', data = null, responseId) {
+            const responseArea = document.getElementById(responseId);
+            responseArea.classList.add('show');
+            responseArea.classList.remove('error');
+            responseArea.innerHTML = '<div class="loading">🔄 正在请求...</div>';
+
+            try {
+                const options = {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                };
+
+                if (data) {
+                    options.body = JSON.stringify(data);
+                }
+
+                const response = await fetch(API_BASE + endpoint, options);
+                const result = await response.json();
+
+                responseArea.innerHTML = `
+                    <strong>状态码:</strong> ${response.status}<br>
+                    <strong>响应数据:</strong><br>
+                    <pre>${JSON.stringify(result, null, 2)}</pre>
+                `;
+            } catch (error) {
+                responseArea.classList.add('error');
+                responseArea.innerHTML = `
+                    <strong>❌ 请求失败:</strong><br>
+                    <pre>${error.message}</pre>
+                `;
+            }
+        }
+
+        // 提交询价表单
+        function submitInquiry() {
+            const data = {
+                contactName: document.getElementById('contactName').value,
+                contactPhone: document.getElementById('contactPhone').value,
+                contactEmail: document.getElementById('contactEmail').value,
+                companyName: document.getElementById('companyName').value,
+                requirements: document.getElementById('requirements').value,
+                quantity: parseInt(document.getElementById('quantity').value),
+                budget: parseFloat(document.getElementById('budget').value),
+                urgency: document.getElementById('urgency').value
+            };
+
+            testAPI('/api/inquiries', 'POST', data, 'inquiry-submit-response');
+        }
+
+        // 检查服务器状态
+        async function checkServerStatus() {
+            try {
+                const response = await fetch(API_BASE + '/health');
+                const result = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('serverStatus').innerHTML = '✅ 服务器运行正常 - ' + result.timestamp;
+                    document.getElementById('serverStatus').style.background = '#27ae60';
+                } else {
+                    throw new Error('服务器响应异常');
+                }
+            } catch (error) {
+                document.getElementById('serverStatus').innerHTML = '❌ 服务器连接失败 - ' + error.message;
+                document.getElementById('serverStatus').style.background = '#e74c3c';
+            }
+        }
+
+        // 加载统计数据
+        async function loadStats() {
+            try {
+                // 获取产品数量
+                const productsResponse = await fetch(API_BASE + '/api/products');
+                const productsData = await productsResponse.json();
+                if (productsData.success && productsData.data.products) {
+                    document.getElementById('productCount').textContent = productsData.data.products.length;
+                }
+
+                // 获取分类数量
+                const categoriesResponse = await fetch(API_BASE + '/api/categories');
+                const categoriesData = await categoriesResponse.json();
+                if (categoriesData.success && categoriesData.data) {
+                    document.getElementById('categoryCount').textContent = categoriesData.data.length;
+                }
+
+                // 获取询价数量
+                const inquiriesResponse = await fetch(API_BASE + '/api/inquiries');
+                const inquiriesData = await inquiriesResponse.json();
+                if (inquiriesData.success && inquiriesData.data) {
+                    document.getElementById('inquiryCount').textContent = inquiriesData.data.length;
+                }
+
+                // 获取应用场景数量
+                const applicationsResponse = await fetch(API_BASE + '/api/applications');
+                const applicationsData = await applicationsResponse.json();
+                if (applicationsData.success && applicationsData.data) {
+                    document.getElementById('applicationCount').textContent = applicationsData.data.length;
+                }
+            } catch (error) {
+                console.error('加载统计数据失败:', error);
+            }
+        }
+
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            checkServerStatus();
+            loadStats();
+            
+            // 每30秒检查一次服务器状态
+            setInterval(checkServerStatus, 30000);
+        });
+    </script>
+</body>
+</html>

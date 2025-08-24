@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>施小雅板材 - 企业展示</title>
+  <style>
+    body {
+      font-family: 'Microsoft YaHei', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f5f5f5;
+      flex-direction: column;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      padding: 40px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .loading {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top-color: #3498db;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    .btn:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>施小雅板材企业展示</h1>
+    <div class="loading"></div>
+    <p>正在加载应用，请稍候...</p>
+    <p>如果页面没有自动跳转，请点击下方按钮</p>
+    <a href="./preview.html" class="btn" id="manualLink">进入应用</a>
+  </div>
+
+  <script>
+    // 页面加载完成后自动跳转到应用页面
+    document.addEventListener('DOMContentLoaded', function() {
+      // 设置一个短暂的延迟，让用户看到加载动画
+      setTimeout(function() {
+        window.location.href = './preview.html';
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

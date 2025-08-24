@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>施小雅板材 - 项目预览</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature {
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .feature h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .status.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.new {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .tech-tag {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: #495057;
+        }
+        
+        .api-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .api-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .api-method {
+            font-weight: bold;
+            color: #667eea;
+            margin-right: 10px;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏗️ 施小雅板材项目</h1>
+            <p>完整的多端板材行业应用解决方案</p>
+        </div>
+
+        <div class="section">
+            <h2>📱 项目概述</h2>
+            <p>基于 Taro 框架开发的多端板材行业应用，支持微信小程序、H5、支付宝小程序等多个平台。项目包含完整的前端展示和后端API服务。</p>
+            
+            <div class="highlight">
+                <h3>🎉 主要改进完成</h3>
+                <p><span class="status completed">✅ 已完成</span> 产品页面从医院分类改为板材行业应用场景分类</p>
+                <p><span class="status completed">✅ 已完成</span> 完整的后端API系统开发</p>
+                <p><span class="status new">🆕 新增</span> Docker容器化部署支持</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 技术架构</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>前端技术栈</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Taro 3.6.15</span>
+                        <span class="tech-tag">React 17.0.0</span>
+                        <span class="tech-tag">SCSS</span>
+                        <span class="tech-tag">多端支持</span>
+                    </div>
+                </div>
+                <div class="feature">
+                    <h3>后端技术栈</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Express</span>
+                        <span class="tech-tag">MySQL</span>
+                        <span class="tech-tag">Sequelize</span>
+                        <span class="tech-tag">JWT</span>
+                        <span class="tech-tag">Redis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 核心功能模块</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>🔐 用户认证系统</h3>
+                    <p>支持用户注册、登录、微信小程序授权登录，基于JWT的权限控制系统。</p>
+                    <span class="status completed">已完成</span>
+                </div>
+                <div class="feature">
+                    <h3>📦 产品管理系统</h3>
+                    <p>产品CRUD、分类管理、应用场景关联、搜索筛选功能。</p>
+                    <span class="status completed">已完成</span>
+                </div>
+                <div class="feature">
+                    <h3>💬 询价管理系统</h3>
+                    <p>询价提交、状态跟踪、统计分析、客户跟进管理。</p>
+                    <span class="status completed">已完成</span>
+                </div>
+                <div class="feature">
+                    <h3>🏆 案例展示系统</h3>
+                    <p>项目案例管理、分类展示、热门案例推荐。</p>
+                    <span class="status completed">已完成</span>
+                </div>
+                <div class="feature">
+                    <h3>📜 认证管理系统</h3>
+                    <p>资质认证信息管理、分类展示、有效期管理。</p>
+                    <span class="status completed">已完成</span>
+                </div>
+                <div class="feature">
+                    <h3>📁 文件上传系统</h3>
+                    <p>支持单文件/多文件上传，文件类型验证和管理。</p>
+                    <span class="status completed">已完成</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔌 API接口 (40+个)</h2>
+            <div class="api-list">
+                <div class="api-item">
+                    <span class="api-method">POST</span>/api/auth/login<br>
+                    <small>用户登录认证</small>
+                </div>
+                <div class="api-item">
+                    <span class="api-method">GET</span>/api/products<br>
+                    <small>获取产品列表</small>
+                </div>
+                <div class="api-item">
+                    <span class="api-method">POST</span>/api/inquiries<br>
+                    <small>提交询价信息</small>
+                </div>
+                <div class="api-item">
+                    <span class="api-method">GET</span>/api/cases<br>
+                    <small>获取案例展示</small>
+                </div>
+                <div class="api-item">
+                    <span class="api-method">GET</span>/api/certifications<br>
+                    <small>获取认证信息</small>
+                </div>
+                <div class="api-item">
+                    <span class="api-method">POST</span>/api/upload/single<br>
+                    <small>文件上传接口</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚀 部署方式</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3>Docker部署 (推荐)</h3>
+                    <p>使用Docker Compose一键部署，包含MySQL、Redis、API服务。</p>
+                    <code style="background: #f8f9fa; padding: 10px; display: block; margin-top: 10px; border-radius: 5px;">
+                        cd backend<br>
+                        docker-compose up -d
+                    </code>
+                </div>
+                <div class="feature">
+                    <h3>手动部署</h3>
+                    <p>传统的手动部署方式，适合开发环境和自定义配置。</p>
+                    <code style="background: #f8f9fa; padding: 10px; display: block; margin-top: 10px; border-radius: 5px;">
+                        npm install<br>
+                        npm run dev
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📊 数据库设计</h2>
+            <p>完整的数据库设计，包含7个核心表：</p>
+            <div class="tech-stack" style="margin-top: 15px;">
+                <span class="tech-tag">users - 用户表</span>
+                <span class="tech-tag">products - 产品表</span>
+                <span class="tech-tag">categories - 分类表</span>
+                <span class="tech-tag">applications - 应用场景表</span>
+                <span class="tech-tag">inquiries - 询价表</span>
+                <span class="tech-tag">cases - 案例表</span>
+                <span class="tech-tag">certifications - 认证表</span>
+            </div>
+        </div>
+
+        <div class="highlight">
+            <h3>🎯 项目特色</h3>
+            <p>✅ 完整的业务闭环：从产品展示到询价转化</p>
+            <p>✅ 专业的板材行业定制：针对板材行业的业务场景</p>
+            <p>✅ 现代化的技术架构：前后端分离，支持多端部署</p>
+            <p>✅ 完善的权限管理：用户、VIP、管理员三级权限</p>
+            
+            <div style="margin-top: 20px;">
+                <a href="#" class="btn" onclick="alert('请在终端中运行: npm run dev:h5')">启动H5预览</a>
+                <a href="#" class="btn" onclick="alert('请在终端中运行: cd backend && npm run dev')">启动后端服务</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📝 默认账户信息</h2>
+            <div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107;">
+                <p><strong>管理员账户:</strong></p>
+                <p>邮箱: admin@shixiaoya.com</p>
+                <p>密码: admin123456</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 添加一些交互效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            features.forEach(feature => {
+                feature.addEventListener('mouseenter', function() {
+                    this.style.borderColor = '#667eea';
+                });
+                feature.addEventListener('mouseleave', function() {
+                    this.style.borderColor = '#e0e0e0';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
